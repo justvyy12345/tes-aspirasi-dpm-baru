@@ -1,138 +1,150 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aspirasi Mahasiswa - DPM FEB UNISMA</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DPM FEB UNISMA</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+<style>
+html{scroll-behavior:smooth}
+.hero-bg{
+ background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://raw.githubusercontent.com/justvyy12345/tes-aspirasi-dpm-baru/main/hero-dpm.jpg');
+ background-size: cover; background-position: center;
+}
+</style>
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen p-4">
-  <div class="max-w-2xl mx-auto">
-    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-xl mt-8">
-      <div class="text-center mb-6">
-        <h1 class="text-3xl font-bold text-blue-900">Aspirasi DPM FEB UNISMA</h1>
-        <p class="text-gray-600 mt-2">Suarakan keluhan, saran, dan masukanmu untuk FEB yang lebih baik</p>
-      </div>
+<body class="bg-gray-50">
 
-      <form id="aspirasiForm">
-        <div class="mb-5">
-          <label class="flex items-center cursor-pointer">
-            <input type="checkbox" id="is_anonim" class="w-4 h-4 text-blue-600 rounded">
-            <span class="ml-2 text-gray-700">Kirim sebagai Anonim</span>
-          </label>
-          <p class="text-xs text-gray-500 ml-6">Identitasmu akan disembunyikan dari DPM</p>
-        </div>
+<!-- HEADER -->
+<header class="bg-white/90 backdrop-blur sticky top-0 z-50 shadow-sm">
+<div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+<div class="flex items-center gap-3">
+<img src="https://raw.githubusercontent.com/justvyy12345/tes-aspirasi-dpm-baru/main/hero-dpm.jpg" class="w-10 h-10 rounded-lg object-cover">
+<div><p class="font-bold text-blue-900 leading-none">DPM FEB UNISMA</p><p class="text-[10px] text-gray-500">Dewan Perwakilan Mahasiswa</p></div>
+</div>
+<nav class="hidden md:flex gap-6 text-sm font-medium">
+<a href="#beranda">Beranda</a><a href="#berita">Program Kerja</a><a href="#dana">Dana</a><a href="#aspirasi">Aspirasi</a><a href="#tentang">Tentang</a>
+<button onclick="document.getElementById('loginModal').classList.remove('hidden')" class="bg-blue-700 text-white px-4 py-1.5 rounded-lg">Login</button>
+</nav>
+<button id="menuBtn" class="md:hidden text-2xl"><i class="ri-menu-line"></i></button>
+</div>
+<div id="mMenu" class="hidden md:hidden px-4 pb-4 flex flex-col gap-3 text-sm border-t">
+<a href="#beranda" class="pt-3">Beranda</a><a href="#berita">Program Kerja ORMAWA</a><a href="#dana">Dana ORMAWA</a><a href="#aspirasi">Aspirasi Mahasiswa</a><a href="#tentang">Tentang DPM</a>
+<button onclick="document.getElementById('loginModal').classList.remove('hidden')" class="bg-blue-700 text-white px-4 py-2 rounded-lg">Login Pengurus</button>
+</div>
+</header>
 
-        <div id="identitas" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
-            <input type="text" id="nama" placeholder="Nama kamu" class="w-full border border-gray-300 p-2.5 rounded-lg">
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">No. WA / Email</label>
-            <input type="text" id="kontak" placeholder="08xxx / email@..." class="w-full border border-gray-300 p-2.5 rounded-lg">
-          </div>
-        </div>
+<!-- HERO -->
+<section id="beranda" class="hero-bg text-white text-center py-28 px-4">
+<h1 class="text-3xl md:text-5xl font-bold leading-tight">Dewan Perwakilan Mahasiswa<br>Fakultas Ekonomi dan Bisnis<br>Universitas Islam Malang</h1>
+<p class="mt-4 text-yellow-300 font-bold text-xl">“Berani Bersikap, Berani Bertanggungjawab”</p>
+<div class="mt-8 flex justify-center gap-4">
+<a href="#aspirasi" class="bg-yellow-400 text-blue-900 px-8 py-3 rounded-lg font-bold">Isi Aspirasi</a>
+<a href="#berita" class="bg-white/20 border border-white px-8 py-3 rounded-lg font-bold">Lihat Program Kerja</a>
+</div>
+</section>
 
-        <div class="mb-5">
-          <label class="block text-sm font-medium text-gray-700 mb-1">Kategori Aspirasi *</label>
-          <select id="kategori" required class="w-full border border-gray-300 p-2.5 rounded-lg bg-white">
-            <option value="">Pilih Kategori</option>
-            <option>Fasilitas</option>
-            <option>Akademik</option>
-            <option>Keuangan</option>
-            <option>Organisasi Kemahasiswaan</option>
-            <option>Lainnya</option>
-          </select>
-        </div>
+<!-- BERITA -->
+<section id="berita" class="py-16 bg-white">
+<div class="max-w-7xl mx-auto px-4">
+<h2 class="text-3xl font-bold text-center text-blue-900">Berita & Kegiatan ORMAWA</h2>
+<div class="flex flex-wrap gap-2 justify-center mt-6 mb-8">
+<button class="bg-blue-700 text-white px-4 py-2 rounded-full text-sm">Semua</button>
+<button class="bg-gray-200 px-4 py-2 rounded-full text-sm">DPM</button>
+<button class="bg-gray-200 px-4 py-2 rounded-full text-sm">BEM</button>
+<button class="bg-gray-200 px-4 py-2 rounded-full text-sm">BSO</button>
+<button class="bg-gray-200 px-4 py-2 rounded-full text-sm">HIMAPRODI</button>
+</div>
+<div class="grid md:grid-cols-3 gap-6">
+<div class="rounded-xl shadow overflow-hidden"><img src="https://raw.githubusercontent.com/justvyy12345/tes-aspirasi-dpm-baru/main/hero-dpm.jpg" class="h-48 w-full object-cover"><div class="p-4"><span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">DPM</span><h3 class="font-bold mt-2">Pelantikan dan Sertijab ORMAWA dan Unit FEB UNISMA</h3><p class="text-xs text-gray-500 mt-1">1 Ags 2026 • DPM FEB</p></div></div>
+<div class="rounded-xl shadow overflow-hidden"><img src="https://placehold.co/400x250/1e40af/white?text=BEM" class="h-48 w-full object-cover"><div class="p-4"><span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">BEM</span><h3 class="font-bold mt-2">Program Kerja BEM FEB Akan Datang</h3><p class="text-xs text-gray-500 mt-1">Segera</p></div></div>
+<div class="rounded-xl shadow overflow-hidden"><img src="https://placehold.co/400x250/f59e0b/white?text=HIMA" class="h-48 w-full object-cover"><div class="p-4"><span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">HIMAPRODI</span><h3 class="font-bold mt-2">Kegiatan HIMAPRODI Manajemen</h3><p class="text-xs text-gray-500 mt-1">Segera</p></div></div>
+</div>
+</div>
+</section>
 
-        <div class="mb-5">
-          <label class="block text-sm font-medium text-gray-700 mb-1">Isi Aspirasi *</label>
-          <textarea id="isi" required rows="5" placeholder="Jelaskan keluhan atau saranmu sedetail mungkin..." class="w-full border border-gray-300 p-2.5 rounded-lg"></textarea>
-        </div>
+<!-- STATISTIK -->
+<section id="dana" class="py-12 bg-blue-900 text-white">
+<div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 text-center gap-8">
+<div><p id="statAspirasi" class="text-5xl font-bold">0</p><p class="text-blue-200">Aspirasi Masuk</p></div>
+<div><p class="text-5xl font-bold">12</p><p class="text-blue-200">Proker Selesai</p></div>
+<div><p class="text-5xl font-bold">Rp 45jt</p><p class="text-blue-200">Dana Digunakan</p></div>
+</div>
+</section>
 
-        <div class="mb-6">
-          <label class="block text-sm font-medium text-gray-700 mb-1">Bukti Pendukung</label>
-          <input type="file" id="bukti" accept="image/*,.pdf" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
-          <p class="text-xs text-gray-500 mt-1">Opsional. JPG, PNG, PDF. Maks 2MB</p>
-        </div>
+<!-- STRUKTUR -->
+<section id="tentang" class="py-16 bg-gray-50">
+<div class="max-w-7xl mx-auto px-4">
+<h2 class="text-3xl font-bold text-center text-blue-900">Struktur Pengurus DPM</h2>
+<div class="flex flex-wrap gap-2 justify-center mt-6 mb-8">
+<button class="bg-blue-700 text-white px-4 py-2 rounded-full text-sm">DPH</button><button class="bg-gray-200 px-4 py-2 rounded-full text-sm">Komisi I</button><button class="bg-gray-200 px-4 py-2 rounded-full text-sm">Komisi II</button><button class="bg-gray-200 px-4 py-2 rounded-full text-sm">Komisi III</button><button class="bg-gray-200 px-4 py-2 rounded-full text-sm">Komisi IV</button>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+<div class="bg-white p-4 rounded-xl shadow text-center"><img src="https://placehold.co/200x200/1e40af/white?text=Ketua" class="w-24 h-24 rounded-full mx-auto object-cover"><h3 class="font-bold mt-2">Ketua Umum</h3><p class="text-xs text-blue-700">DPH</p><p class="text-[10px] text-gray-500">Manajemen 22</p></div>
+<div class="bg-white p-4 rounded-xl shadow text-center"><img src="https://placehold.co/200x200/1e40af/white?text=Wakil" class="w-24 h-24 rounded-full mx-auto"><h3 class="font-bold mt-2">Wakil Ketua</h3><p class="text-xs text-blue-700">DPH</p></div>
+<div class="bg-white p-4 rounded-xl shadow text-center"><img src="https://placehold.co/200x200/1e40af/white?text=Sekretaris" class="w-24 h-24 rounded-full mx-auto"><h3 class="font-bold mt-2">Sekretaris</h3><p class="text-xs">DPH</p></div>
+</div>
+</div>
+</section>
 
-        <button type="submit" id="btnKirim" class="w-full bg-blue-700 hover:bg-blue-800 text-white p-3 rounded-lg font-bold transition">
-          Kirim Aspirasi
-        </button>
-      </form>
+<!-- FORM ASPIRASI LENGKAP -->
+<section id="aspirasi" class="py-16 bg-white">
+<div class="max-w-2xl mx-auto px-4">
+<div class="bg-gray-50 p-6 rounded-2xl shadow-xl">
+<h2 class="text-2xl font-bold text-center text-blue-900 mb-6">Formulir Aspirasi Mahasiswa</h2>
+<form id="aspirasiForm">
+<label class="flex gap-2 text-sm mb-4"><input type="checkbox" id="is_anonim"> Kirim sebagai Anonim</label>
+<div id="identitas" class="grid md:grid-cols-2 gap-4 mb-4">
+<input id="nama" placeholder="Nama Lengkap" class="border p-2.5 rounded-lg">
+<input id="kontak" placeholder="WA / Email" class="border p-2.5 rounded-lg">
+</div>
+<select id="kategori" required class="w-full border p-2.5 rounded-lg mb-4 bg-white"><option value="">Pilih Kategori</option><option>Fasilitas</option><option>Akademik</option><option>Keuangan</option><option>Organisasi</option><option>Lainnya</option></select>
+<textarea id="isi" required rows="4" placeholder="Isi aspirasi..." class="w-full border p-2.5 rounded-lg mb-4"></textarea>
+<input type="file" id="bukti" accept="image/*,.pdf" class="w-full text-sm mb-4">
+<button id="btnKirim" class="w-full bg-blue-700 text-white p-3 rounded-lg font-bold">Kirim Aspirasi</button>
+</form>
+<div id="hasil" class="hidden mt-6 p-4 bg-green-50 border border-green-200 rounded-lg"><p class="font-bold text-green-800">✅ Berhasil!</p><p class="mt-2">Tiket: <span id="nomorTiket" class="font-mono bg-green-200 px-2 py-1 rounded"></span></p></div>
+<div id="error" class="hidden mt-4 p-3 bg-red-50 text-red-700 rounded"></div>
+</div>
+</div>
+</section>
 
-      <div id="hasil" class="hidden mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-        <p class="font-bold text-green-800">✅ Aspirasi berhasil dikirim!</p>
-        <p class="mt-2">Nomor Tiket Anda: <span id="nomorTiket" class="font-mono bg-green-200 px-2 py-1 rounded"></span></p>
-        <p class="text-sm text-green-700 mt-2">Simpan nomor tiket ini untuk menanyakan tindak lanjut ke DPM FEB.</p>
-        <button onclick="location.reload()" class="mt-4 text-sm text-blue-600 hover:underline">Kirim aspirasi lain</button>
-      </div>
+<footer class="bg-gray-900 text-gray-300 py-10">
+<div class="max-w-7xl mx-auto px-4 grid md:grid-cols-4 gap-8 text-sm">
+<div><p class="font-bold text-white">DPM FEB UNISMA</p><p class="mt-2">Berani Bersikap, Berani Bertanggungjawab</p></div>
+<div><p class="font-semibold text-white">Sekretariat</p><p class="mt-2">Gedung FEB Lt.2<br>Jl. Mayjen Haryono 193 Malang</p></div>
+<div><p class="font-semibold text-white">Kontak</p><p class="mt-2">dpm.feb@unisma.ac.id<br>08xxxx</p></div>
+<div><p class="font-semibold text-white">Medsos</p><p class="mt-2">@dpm.febunisma</p></div>
+</div>
+<p class="text-center text-xs mt-8 text-gray-500">© 2026 DPM FEB UNISMA</p>
+</footer>
 
-      <div id="error" class="hidden mt-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800"></div>
-    </div>
-    <p class="text-center text-xs text-gray-500 mt-6">© 2026 DPM FEB UNISMA</p>
-  </div>
+<div id="loginModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"><div class="bg-white p-6 rounded-xl w-full max-w-sm"><div class="flex justify-between"><h3 class="font-bold">Login Pengurus</h3><button onclick="document.getElementById('loginModal').classList.add('hidden')" class="text-xl">&times;</button></div><input placeholder="Email" class="w-full border p-2 rounded mt-4"><input type="password" placeholder="Password" class="w-full border p-2 rounded mt-3"><button class="w-full bg-blue-700 text-white p-2 rounded mt-4 font-bold">Masuk</button></div></div>
 
 <script>
 const SUPABASE_URL = 'https://jnhwesngreqdsmeelroh.supabase.co'
 const SUPABASE_ANON_KEY = 'sb_publishable_N_EV5qyDnuKxIih9deNRZg_YshAtzrL'
-
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+document.getElementById('menuBtn').addEventListener('click',()=>document.getElementById('mMenu').classList.toggle('hidden'))
+document.getElementById('is_anonim').addEventListener('change',e=>{document.getElementById('identitas').style.display=e.target.checked?'none':'grid'})
 
-document.getElementById('is_anonim').addEventListener('change', (e) => {
-  document.getElementById('identitas').style.display = e.target.checked? 'none' : 'grid'
-  if(e.target.checked) {
-    document.getElementById('nama').value = ''
-    document.getElementById('kontak').value = ''
-  }
-})
+async function loadStat(){const {count}=await supabase.from('aspirasi').select('*',{count:'exact',head:true}); document.getElementById('statAspirasi').innerText=count||0}
+loadStat()
 
-document.getElementById('aspirasiForm').addEventListener('submit', async (e) => {
-  e.preventDefault()
-  const btn = document.getElementById('btnKirim')
-  const errorDiv = document.getElementById('error')
-  btn.disabled = true
-  btn.innerText = 'Mengirim...'
-  errorDiv.classList.add('hidden')
-
-  try {
-    const is_anonim = document.getElementById('is_anonim').checked
-    const file = document.getElementById('bukti').files[0]
-    let bukti_url = null
-
-    if (file) {
-      if (file.size > 2 * 1024) throw new Error('Ukuran file maksimal 2MB')
-      const fileExt = file.name.split('.').pop()
-      const fileName = `${Date.now()}.${fileExt}`
-      const { error: uploadError } = await supabase.storage.from('bukti_aspirasi').upload(fileName, file)
-      if (uploadError) throw uploadError
-      bukti_url = supabase.storage.from('bukti_aspirasi').getPublicUrl(fileName).data.publicUrl
-    }
-
-    const { data, error } = await supabase.from('aspirasi').insert({
-        is_anonim: is_anonim,
-        nama_pengirim: is_anonim? null : document.getElementById('nama').value || null,
-        kontak_pengirim: is_anonim? null : document.getElementById('kontak').value || null,
-        kategori: document.getElementById('kategori').value,
-        isi_aspirasi: document.getElementById('isi').value,
-        bukti_url: bukti_url
-      }).select('nomor_tiket').single()
-
-    if (error) throw error
-
-    document.getElementById('nomorTiket').innerText = data.nomor_tiket
-    document.getElementById('hasil').classList.remove('hidden')
-    document.getElementById('aspirasiForm').style.display = 'none'
-
-  } catch (err) {
-    errorDiv.innerText = 'Gagal mengirim: ' + err.message
-    errorDiv.classList.remove('hidden')
-  } finally {
-    btn.disabled = false
-    btn.innerText = 'Kirim Aspirasi'
-  }
+document.getElementById('aspirasiForm').addEventListener('submit', async e=>{
+ e.preventDefault()
+ const btn=document.getElementById('btnKirim'); btn.disabled=true; btn.innerText='Mengirim...'
+ try{
+  let bukti_url=null; const file=document.getElementById('bukti').files[0]
+  if(file){ const name=Date.now()+'.'+file.name.split('.').pop(); const {error}=await supabase.storage.from('bukti_aspirasi').upload(name,file); if(error) throw error; bukti_url=supabase.storage.from('bukti_aspirasi').getPublicUrl(name).data.publicUrl}
+  const is_anon=document.getElementById('is_anonim').checked
+  const {data,error}=await supabase.from('aspirasi').insert({is_anonim:is_anon,nama_pengirim:is_anon?null:document.getElementById('nama').value||null,kontak_pengirim:is_anon?null:document.getElementById('kontak').value||null,kategori:document.getElementById('kategori').value,isi_aspirasi:document.getElementById('isi').value,bukti_url}).select('nomor_tiket').single()
+  if(error) throw error
+  document.getElementById('nomorTiket').innerText=data.nomor_tiket; document.getElementById('hasil').classList.remove('hidden'); document.getElementById('aspirasiForm').style.display='none'
+ }catch(err){ document.getElementById('error').innerText=err.message; document.getElementById('error').classList.remove('hidden')}
+ btn.disabled=false; btn.innerText='Kirim Aspirasi'
 })
 </script>
 </body>
